@@ -1,0 +1,28 @@
+const messages = [
+  { day: 1, title: "Día 1", text: "Me alegra tanto que estés aquí. Gracias por existir y por hacer mis días mejores.", song: "Perfect - Ed Sheeran" },
+  { day: 2, title: "Día 2", text: "Tu sonrisa es mi lugar favorito en el mundo entero.", song: "All of Me - John Legend" },
+  { day: 3, title: "Día 3", text: "Eres mi lugar favorito. Donde estés tú, ahí está mi hogar.", song: "A Thousand Years - Christina Perri" },
+  { day: 4, title: "Día 4", text: "Gracias por quererme tal y como soy, sin pedir nada a cambio.", song: "Can't Help Falling in Love - Elvis Presley" },
+  { day: 5, title: "Día 5", text: "Cada momento contigo se convierte en un recuerdo que atesoro para siempre.", song: "Lover - Taylor Swift" },
+  { day: 6, title: "Día 6", text: "Si pudiera elegir una y otra vez, siempre te elegiría a ti.", song: "Die With A Smile - Lady Gaga & Bruno Mars" },
+  { day: 7, title: "Día 7", text: "Contigo aprendí que el amor no duele, que el amor abraza y cuida.", song: "Make You Feel My Love - Adele" },
+  { day: 8, title: "Día 8", text: "Eres la persona que me hace querer ser mejor cada día.", song: "Lucky - Jason Mraz" },
+  { day: 9, title: "Día 9", text: "Tu risa es mi canción favorita y tu abrazo, mi refugio.", song: "Thinking Out Loud - Ed Sheeran" },
+  { day: 10, title: "Día 10", text: "Me gusta la vida cuando estás en ella. Qué suerte tengo.", song: "You Are The Best Thing - Ray LaMontagne" },
+  { day: 11, title: "Día 11", text: "Eres la respuesta a preguntas que ni siquiera sabía que tenía.", song: "Speechless - Dan + Shay" },
+  { day: 12, title: "Día 12", text: "Gracias por cada pequeño gesto, cada mirada, cada momento compartido.", song: "Somewhere Only We Know - Keane" },
+  { day: 13, title: "Día 13", text: "Contigo, los días ordinarios se vuelven extraordinarios.", song: "Turning Page - Sleeping At Last" },
+  { day: 14, title: "Día 14", text: "Mi corazón te encontró antes de que yo supiera que te buscaba.", song: "Like Real People Do - Hozier" },
+  { day: 15, title: "Día 15", text: "Eres la persona con quien quiero compartir todos mis silencios.", song: "The Night Will Always Win - Manchester Orchestra" },
+  { day: 16, title: "Día 16", text: "Hay una magia especial en cómo me miras. Nunca lo olvido.", song: "From The Start - Laufey" },
+  { day: 17, title: "Día 17", text: "Lo que siento por ti no necesita palabras, pero aún así te lo digo: te quiero.", song: "Venus - Sleeping At Last" },
+  { day: 18, title: "Día 18", text: "Eres un capítulo que quiero releer siempre.", song: "Sweet Creature - Harry Styles" },
+  { day: 19, title: "Día 19", text: "Que sepas que tienes alguien que piensa en ti con mucho cariño cada día.", song: "I Get To Love You - Ruelle" },
+  { day: 20, title: "Día 20", text: "Eres la cosa más bonita que me ha pasado sin que yo lo planeara.", song: "Grow As We Go - Ben Platt" },
+  { day: 21, title: "Día 21", text: "Me encanta cómo el mundo se siente más ligero cuando estás tú cerca.", song: "In My Life - The Beatles" },
+  { day: 22, title: "Día 22", text: "Gracias por ser tú. Por no ser nadie más. Por ser exactamente quien eres.", song: "You & Me - Dave Matthews Band" },
+  { day: 23, title: "Día 23", text: "Cada día contigo es un regalo que no me canso de abrir.", song: "Better Together - Jack Johnson" },
+  { day: 24, title: "Día 24", text: "Y al final de este recorrido, la conclusión es simple: te quiero, hoy y siempre. 💖", song: "La Vie En Rose - Édith Piaf" },
+]
+
+export default messages

@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fdf2f4;
+  font-family: 'Lato', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --pink-light: #fce8ec;
+  --pink-mid: #f2c4c8;
+  --pink-dark: #c0606e;
+  --rose-deep: #7a2b35;
+  --cream: #fdf2f4;
+}
