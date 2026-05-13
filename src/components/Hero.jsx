@@ -90,12 +90,7 @@ function Hero() {
         </motion.p>
 
         {/* Corner notes (like the design reference) */}
-        <div
-          className="hidden md:block absolute top-8 right-0 text-right text-[#c0606e] opacity-60"
-          style={{ fontFamily: "'Georgia', serif", fontSize: 13, fontStyle: "italic", lineHeight: 1.6 }}
-        >
-          Eres mi ♥<br />lugar favorito
-        </div>
+        
 
         {/* CTA Button */}
         <motion.div

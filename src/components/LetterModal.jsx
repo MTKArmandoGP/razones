@@ -301,27 +301,7 @@ export default function LetterModal({ item, onClose, onPrev, onNext }) {
         </div>{/* end scene */}
 
         {/* Song button — fades in when open */}
-        <motion.div
-          animate={{ opacity: stage === "open" ? 1 : 0, y: stage === "open" ? 0 : 8 }}
-          transition={{ delay:0.2, duration:0.5 }}
-          style={{ marginTop:18 }}
-        >
-          {item.song && (
-            <button style={{
-              display:"flex", alignItems:"center", gap:8,
-              padding:"10px 22px", borderRadius:999,
-              background:"rgba(255,255,255,0.92)",
-              color:"#c0606e", fontSize:13,
-              fontFamily:"Georgia,serif",
-              border:"1px solid #f9d0d8",
-              boxShadow:"0 4px 18px rgba(192,96,110,0.18)",
-              cursor:"pointer", backdropFilter:"blur(4px)",
-            }}>
-              <span>♪</span>
-              <span>{item.song}</span>
-            </button>
-          )}
-        </motion.div>
+        
       </motion.div>
 
       {/* Next */}
