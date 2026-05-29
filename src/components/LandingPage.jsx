@@ -409,7 +409,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
                     margin: 0,
                     letterSpacing: "0.04em",
                   }}>
-                    se desbloqueará el sábado 30 ♡
+                    se desbloqueará HOY ♡
                   </p>
                 </motion.div>
               )}
