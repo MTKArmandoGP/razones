@@ -431,7 +431,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
             fontStyle: "italic",
           }}
         >
-          Hecho con mucho cariño, solo para ti ♡
+          Hecho con mucho cariño, solo para ti. ♡
         </motion.p>
       </div>
     </section>
