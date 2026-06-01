@@ -5,9 +5,10 @@ import FloatingHearts from "./components/FloatingHearts"
 import LandingPage from "./components/LandingPage"
 import ProposalPage from "./components/ProposalPage"
 import DateInvitePage from "./components/DateInvitePage"
+import TimelinePage from "./components/TimelinePage"
 
 function App() {
-  // "landing" | "calendar" | "proposal" | "date"
+  // "landing" | "calendar" | "proposal" | "date" | "timeline"
   const [page, setPage] = useState("landing")
 
   if (page === "proposal") {
@@ -16,6 +17,10 @@ function App() {
 
   if (page === "date") {
     return <DateInvitePage onBack={() => setPage("landing")} />
+  }
+
+  if (page === "timeline") {
+    return <TimelinePage onBack={() => setPage("landing")} />
   }
 
   if (page === "calendar") {
@@ -56,6 +61,7 @@ function App() {
         onGoCalendar={() => setPage("calendar")}
         onGoProposal={() => setPage("proposal")}
         onGoDate={() => setPage("date")}
+        onGoTimeline={() => setPage("timeline")}
       />
     </main>
   )

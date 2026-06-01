@@ -18,7 +18,7 @@ function pad(n) {
   return String(n).padStart(2, "0")
 }
 
-function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
+function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline }) {
   const [time, setTime] = useState(getTimeLeft())
   const unlocked = time === null
 
@@ -209,7 +209,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
             </div>
           </button>
 
-          {/* ── CARD 2 — Pregunta rápida (Backrooms) ── */}
+          {/* ── CARD 2 — Invitación a salir ── */}
           <button
             onClick={onGoDate}
             style={{
@@ -217,56 +217,42 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
               maxWidth: 400,
               padding: "26px 32px",
               borderRadius: 24,
-              border: "1.5px solid rgba(255,230,140,0.35)",
-              background: "linear-gradient(135deg, #1a1808 0%, #1f1e0a 60%, #18160a 100%)",
+              border: "1.5px solid #f2c4c8",
+              background: "linear-gradient(135deg, #fffaf9 0%, #fff5f7 60%, #fef0f3 100%)",
               cursor: "pointer",
               textAlign: "left",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+              boxShadow: "0 8px 32px rgba(192,96,110,0.12)",
               transition: "transform 0.22s ease, box-shadow 0.22s ease",
               position: "relative",
               overflow: "hidden",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-4px)"
-              e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.4), 0 0 32px rgba(255,220,80,0.12)"
+              e.currentTarget.style.boxShadow = "0 16px 48px rgba(192,96,110,0.2)"
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)"
-              e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.3)"
+              e.currentTarget.style.boxShadow = "0 8px 32px rgba(192,96,110,0.12)"
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <div style={{
                 width: 48, height: 48, borderRadius: "50%",
-                background: "rgba(255,230,140,0.1)",
-                border: "1px solid rgba(255,230,140,0.25)",
+                background: "linear-gradient(135deg, #fce8ec, #f9d0d8)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 22, flexShrink: 0,
               }}>
-                ❓
+                🌙
               </div>
               <div>
-                <p style={{
-                  fontFamily: "'Courier New', monospace",
-                  fontSize: 17, color: "#ffe68a",
-                  margin: "0 0 4px", letterSpacing: "0.04em",
-                }}>
-                  Pregunta rápida...
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 18, color: "#5b2d2d", margin: "0 0 4px" }}>
+                  Una invitación para salir
+                </p>
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 13, color: "#b08090", margin: 0, fontStyle: "italic" }}>
+                  dos ideas que quiero compartirte ♡
                 </p>
               </div>
             </div>
-            {/* Scanlines */}
-            <div style={{
-              position: "absolute", inset: 0, borderRadius: 24,
-              backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,230,140,0.02) 3px, rgba(255,230,140,0.02) 4px)",
-              pointerEvents: "none",
-            }} />
-            {/* Top glow edge */}
-            <div style={{
-              position: "absolute", top: 0, left: "20%", right: "20%", height: 1,
-              background: "linear-gradient(to right, transparent, rgba(255,230,140,0.3), transparent)",
-              pointerEvents: "none",
-            }} />
           </button>
 
           {/* ── CARD 3 — Propuesta (bloqueada con contador) ── */}
@@ -418,6 +404,58 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
 
         </motion.div>
 
+        {/* ── Botón línea del tiempo ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.7 }}
+          style={{ marginTop: 48, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 32, height: 1, background: "linear-gradient(to right, transparent, #f2c4c8)" }} />
+            <span style={{ color: "#e8a0a8", fontSize: 14 }}>♥</span>
+            <div style={{ width: 32, height: 1, background: "linear-gradient(to left, transparent, #f2c4c8)" }} />
+          </div>
+          <button
+            onClick={onGoTimeline}
+            style={{
+              width: "100%",
+              maxWidth: 400,
+              padding: "20px 28px",
+              borderRadius: 20,
+              border: "1.5px dashed #f2c4c8",
+              background: "transparent",
+              cursor: "pointer",
+              textAlign: "center",
+              transition: "all 0.25s ease",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,220,228,0.18)"
+              e.currentTarget.style.borderColor = "#c0606e"
+              e.currentTarget.style.transform = "translateY(-2px)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent"
+              e.currentTarget.style.borderColor = "#f2c4c8"
+              e.currentTarget.style.transform = "translateY(0)"
+            }}
+          >
+            <span style={{ fontSize: 20 }}>🗓️</span>
+            <div style={{ textAlign: "left" }}>
+              <p style={{ fontFamily: "'Georgia', serif", fontSize: 15, color: "#7a4a55", margin: "0 0 2px" }}>
+                Nuestra historia
+              </p>
+              <p style={{ fontFamily: "'Georgia', serif", fontSize: 12, color: "#b08090", margin: 0, fontStyle: "italic" }}>
+                desde el primer día que salimos ♡
+              </p>
+            </div>
+          </button>
+        </motion.div>
+
         {/* Footer */}
         <motion.p
           initial={{ opacity: 0 }}
@@ -427,7 +465,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate }) {
             fontFamily: "'Georgia', serif",
             fontSize: 13,
             color: "#b08090",
-            marginTop: 40,
+            marginTop: 32,
             fontStyle: "italic",
           }}
         >
