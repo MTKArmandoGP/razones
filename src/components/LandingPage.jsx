@@ -18,7 +18,7 @@ function pad(n) {
   return String(n).padStart(2, "0")
 }
 
-function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline }) {
+function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoFeelings }) {
   const [time, setTime] = useState(getTimeLeft())
   const unlocked = time === null
 
@@ -235,6 +235,46 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline }) {
               e.currentTarget.style.boxShadow = "0 8px 32px rgba(192,96,110,0.12)"
             }}
           >
+            <style>{`
+              @keyframes newPulse {
+                0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(212,96,122,0.4); }
+                50% { transform: scale(1.08); box-shadow: 0 2px 14px rgba(212,96,122,0.6); }
+              }
+              @keyframes newDot {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.4; }
+              }
+            `}</style>
+
+            {/* Badge "nuevo" */}
+            <span
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "4px 11px",
+                borderRadius: 50,
+                background: "linear-gradient(135deg, #d4607a, #c0606e)",
+                color: "#fff",
+                fontFamily: "'Georgia', serif",
+                fontSize: 10,
+                letterSpacing: "0.1em",
+                fontStyle: "italic",
+                textTransform: "uppercase",
+                animation: "newPulse 1.8s ease-in-out infinite",
+              }}
+            >
+              <span style={{
+                width: 6, height: 6, borderRadius: "50%",
+                background: "#fff",
+                animation: "newDot 1.8s ease-in-out infinite",
+              }} />
+              nuevo
+            </span>
+
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <div style={{
                 width: 48, height: 48, borderRadius: "50%",
@@ -254,6 +294,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline }) {
               </div>
             </div>
           </button>
+
 
           {/* ── CARD 3 — Propuesta (bloqueada con contador) ── */}
           <div
@@ -451,6 +492,52 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline }) {
               </p>
               <p style={{ fontFamily: "'Georgia', serif", fontSize: 12, color: "#b08090", margin: 0, fontStyle: "italic" }}>
                 desde el primer día que salimos ♡
+              </p>
+            </div>
+          </button>
+        </motion.div>
+
+        {/* ── Botón Lo que siento ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.05, duration: 0.7 }}
+          style={{ marginTop: 22, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}
+        >
+          <button
+            onClick={onGoFeelings}
+            style={{
+              width: "100%",
+              maxWidth: 400,
+              padding: "20px 28px",
+              borderRadius: 20,
+              border: "1.5px solid #f2c4c8",
+              background: "linear-gradient(135deg, #fffaf9 0%, #fdeef1 100%)",
+              cursor: "pointer",
+              textAlign: "center",
+              transition: "all 0.25s ease",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
+              boxShadow: "0 6px 24px rgba(192,96,110,0.1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)"
+              e.currentTarget.style.boxShadow = "0 12px 36px rgba(192,96,110,0.18)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)"
+              e.currentTarget.style.boxShadow = "0 6px 24px rgba(192,96,110,0.1)"
+            }}
+          >
+            <span style={{ fontSize: 20 }}>🤍</span>
+            <div style={{ textAlign: "left" }}>
+              <p style={{ fontFamily: "'Georgia', serif", fontSize: 15, color: "#7a4a55", margin: "0 0 2px" }}>
+                Lo que siento por ti
+              </p>
+              <p style={{ fontFamily: "'Georgia', serif", fontSize: 12, color: "#b08090", margin: 0, fontStyle: "italic" }}>
+                algo que necesito decirte ♡
               </p>
             </div>
           </button>
