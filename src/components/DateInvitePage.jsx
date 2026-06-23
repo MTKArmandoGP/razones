@@ -30,7 +30,7 @@ async function notificar(respuesta) {
 const dates = [
   {
     id: "friday",
-    day: "Viernes: día completo",
+    day: "Viernes",
     emoji: "🌅",
     color: "#7a2b35",
     accent: "#c0606e",
@@ -52,7 +52,7 @@ const dates = [
   },
   {
     id: "sunday",
-    day: "Domingo en la CDMX",
+    day: "Domingo",
     emoji: "🌸",
     color: "#3b5a3a",
     accent: "#6aaa68",
@@ -60,7 +60,7 @@ const dates = [
     tag: "Un día entero para perdernos en la ciudad",
     title: "Pasar el domingo en\nun lugar muy lindo de la ciudad",
     description:
-      "Un domingo para desconectarnos un poco de todo: ir a algún rincón bonito de la CDMX — puede ser un jardín, un museo chiquito, un barrio con calles bonitas para caminar — y simplemente pasar el día ahí, sin apuro, dejando que la ciudad nos sorprenda.",
+      "Un domingo para desconectarnos un poco de todo: ir a algún rincón bonito — puede ser un jardín, un museo chiquito, un barrio con calles bonitas para caminar — y simplemente pasar el día ahí, sin apuro, dejando que la ciudad nos sorprenda.",
     details: [
       { icon: "🌳", text: "Algún lugar bonito: un jardín, un museo" },
       { icon: "📸", text: "Caminar, ver rincones, tomar fotos tontas" },
