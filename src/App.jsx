@@ -7,6 +7,7 @@ import ProposalPage from "./components/ProposalPage"
 import DateInvitePage from "./components/DateInvitePage"
 import TimelinePage from "./components/TimelinePage"
 import FeelingsPage from "./components/FeelingsPage"
+import BouquetPage from "./components/BouquetPage"
 
 // ─── EmailJS config — mismos valores que el resto del sitio ──────────────────
 const EMAILJS_SERVICE_ID  = "service_k0e0b2g"
@@ -62,6 +63,10 @@ function App() {
     return <FeelingsPage onBack={() => setPage("landing")} />
   }
 
+  if (page === "bouquet") {
+    return <BouquetPage onBack={() => setPage("landing")} />
+  }
+
   if (page === "calendar") {
     return (
       <main className="min-h-screen" style={{ background: "#fdf2f4", color: "#5b2d2d" }}>
@@ -102,6 +107,7 @@ function App() {
         onGoDate={() => setPage("date")}
         onGoTimeline={() => setPage("timeline")}
         onGoFeelings={() => setPage("feelings")}
+        onGoBouquet={() => setPage("bouquet")}
       />
     </main>
   )

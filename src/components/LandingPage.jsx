@@ -18,7 +18,7 @@ function pad(n) {
   return String(n).padStart(2, "0")
 }
 
-function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoFeelings }) {
+function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoFeelings, onGoBouquet }) {
   const [time, setTime] = useState(getTimeLeft())
   const unlocked = time === null
 
@@ -163,6 +163,17 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
           style={{ display: "flex", flexDirection: "column", gap: 18, alignItems: "center", width: "100%" }}
         >
 
+          <style>{`
+            @keyframes newPulse {
+              0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(212,96,122,0.4); }
+              50% { transform: scale(1.08); box-shadow: 0 2px 14px rgba(212,96,122,0.6); }
+            }
+            @keyframes newDot {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0.4; }
+            }
+          `}</style>
+
           {/* ── CARD 1 — Razones ── */}
           <button
             onClick={onGoCalendar}
@@ -235,17 +246,6 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
               e.currentTarget.style.boxShadow = "0 8px 32px rgba(192,96,110,0.12)"
             }}
           >
-            <style>{`
-              @keyframes newPulse {
-                0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(212,96,122,0.4); }
-                50% { transform: scale(1.08); box-shadow: 0 2px 14px rgba(212,96,122,0.6); }
-              }
-              @keyframes newDot {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.4; }
-              }
-            `}</style>
-
             {/* Badge "nuevo" */}
             <span
               style={{
@@ -272,7 +272,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
                 background: "#fff",
                 animation: "newDot 1.8s ease-in-out infinite",
               }} />
-              nuevo
+              nuevo 01/07/2026
             </span>
 
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -295,8 +295,82 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
             </div>
           </button>
 
+          {/* ── CARD 3 — Ramo de flores (nuevo) ── */}
+          <button
+            onClick={onGoBouquet}
+            style={{
+              width: "100%",
+              maxWidth: 400,
+              padding: "26px 32px",
+              borderRadius: 24,
+              border: "1.5px solid #f2c4c8",
+              background: "linear-gradient(135deg, #fffaf9 0%, #fff5f7 60%, #fef0f3 100%)",
+              cursor: "pointer",
+              textAlign: "left",
+              boxShadow: "0 8px 32px rgba(192,96,110,0.12)",
+              transition: "transform 0.22s ease, box-shadow 0.22s ease",
+              position: "relative",
+              overflow: "hidden",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-4px)"
+              e.currentTarget.style.boxShadow = "0 16px 48px rgba(192,96,110,0.2)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)"
+              e.currentTarget.style.boxShadow = "0 8px 32px rgba(192,96,110,0.12)"
+            }}
+          >
+            {/* Badge "nuevo" */}
+            <span
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "4px 11px",
+                borderRadius: 50,
+                background: "linear-gradient(135deg, #d4607a, #c0606e)",
+                color: "#fff",
+                fontFamily: "'Georgia', serif",
+                fontSize: 10,
+                letterSpacing: "0.1em",
+                fontStyle: "italic",
+                textTransform: "uppercase",
+                animation: "newPulse 1.8s ease-in-out infinite",
+              }}
+            >
+              <span style={{
+                width: 6, height: 6, borderRadius: "50%",
+                background: "#fff",
+                animation: "newDot 1.8s ease-in-out infinite",
+              }} />
+              nuevo 01/07/2026
+            </span>
 
-          {/* ── CARD 3 — Propuesta (bloqueada con contador) ── */}
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <div style={{
+                width: 48, height: 48, borderRadius: "50%",
+                background: "linear-gradient(135deg, #fce8ec, #f9d0d8)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 22, flexShrink: 0,
+              }}>
+                💐
+              </div>
+              <div>
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 18, color: "#5b2d2d", margin: "0 0 4px" }}>
+                  Un ramo para ti
+                </p>
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 13, color: "#b08090", margin: 0, fontStyle: "italic" }}>
+                  flores que dicen lo que a veces no digo ♡
+                </p>
+              </div>
+            </div>
+          </button>
+
+          {/* ── CARD 4 — Propuesta (bloqueada con contador) ── */}
           <div
             onClick={() => { if (unlocked) onGoProposal() }}
             style={{
