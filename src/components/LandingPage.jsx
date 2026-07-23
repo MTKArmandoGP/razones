@@ -18,7 +18,7 @@ function pad(n) {
   return String(n).padStart(2, "0")
 }
 
-function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoFeelings, onGoBouquet, onGoStarryNight }) {
+function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoFeelings, onGoBouquet, onGoStarryNight, onGoBts }) {
   const [time, setTime] = useState(getTimeLeft())
   const unlocked = time === null
 
@@ -172,6 +172,21 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
               0%, 100% { opacity: 1; }
               50% { opacity: 0.4; }
             }
+            @keyframes bloodPulse {
+              0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(161,0,0,0.5); }
+              50% { transform: scale(1.08); box-shadow: 0 2px 16px rgba(161,0,0,0.75); }
+            }
+            @keyframes bloodDrip {
+              0% { transform: translateY(0); opacity: 0.9; }
+              70% { opacity: 0.9; }
+              100% { transform: translateY(5px); opacity: 0; }
+            }
+            @keyframes flicker {
+              0%, 100% { opacity: 1; }
+              45% { opacity: 0.85; }
+              50% { opacity: 0.5; }
+              55% { opacity: 0.9; }
+            }
           `}</style>
 
           {/* ── CARD 1 — Razones ── */}
@@ -220,7 +235,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
             </div>
           </button>
 
-          {/* ── CARD 2 — Invitación a salir ── */}
+          {/* ── CARD 2 — Invitación a salir (Evil Dead Rise) ── */}
           <button
             onClick={onGoDate}
             style={{
@@ -228,22 +243,122 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
               maxWidth: 400,
               padding: "26px 32px",
               borderRadius: 24,
-              border: "1.5px solid #f2c4c8",
-              background: "linear-gradient(135deg, #fffaf9 0%, #fff5f7 60%, #fef0f3 100%)",
+              border: "1.5px solid #5c1414",
+              background: "linear-gradient(160deg, #1a0505 0%, #2a0808 55%, #1a0505 100%)",
               cursor: "pointer",
               textAlign: "left",
-              boxShadow: "0 8px 32px rgba(192,96,110,0.12)",
+              boxShadow: "0 8px 32px rgba(120,0,0,0.35)",
               transition: "transform 0.22s ease, box-shadow 0.22s ease",
               position: "relative",
               overflow: "hidden",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-4px)"
-              e.currentTarget.style.boxShadow = "0 16px 48px rgba(192,96,110,0.2)"
+              e.currentTarget.style.boxShadow = "0 16px 48px rgba(161,0,0,0.5)"
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)"
-              e.currentTarget.style.boxShadow = "0 8px 32px rgba(192,96,110,0.12)"
+              e.currentTarget.style.boxShadow = "0 8px 32px rgba(120,0,0,0.35)"
+            }}
+          >
+            {/* Goteos de sangre en el borde superior */}
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 22, pointerEvents: "none" }}>
+              {[
+                { left: "10%", h: 12 }, { left: "24%", h: 7 }, { left: "40%", h: 16 },
+                { left: "58%", h: 9 }, { left: "73%", h: 13 }, { left: "88%", h: 8 },
+              ].map((d, i) => (
+                <div key={i} style={{
+                  position: "absolute", top: 0, left: d.left, width: 4, height: d.h,
+                  background: "linear-gradient(to bottom, #a10000, transparent)",
+                  borderRadius: "0 0 50% 50%",
+                  animation: `bloodDrip ${2.4 + i * 0.4}s ease-in infinite`,
+                  animationDelay: `${i * 0.3}s`,
+                }} />
+              ))}
+            </div>
+
+            {/* Textura de fondo: grietas sutiles */}
+            <div style={{
+              position: "absolute", inset: 0, opacity: 0.5, pointerEvents: "none",
+              background: "radial-gradient(circle at 85% 15%, rgba(161,0,0,0.25) 0%, transparent 45%), radial-gradient(circle at 10% 90%, rgba(161,0,0,0.18) 0%, transparent 40%)",
+            }} />
+
+            {/* Badge "nuevo" */}
+            <span
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "4px 11px",
+                borderRadius: 50,
+                background: "linear-gradient(135deg, #a10000, #6b0000)",
+                color: "#f0d8d8",
+                fontFamily: "'Georgia', serif",
+                fontSize: 10,
+                letterSpacing: "0.1em",
+                fontStyle: "italic",
+                textTransform: "uppercase",
+                border: "1px solid #c94f3e66",
+                animation: "bloodPulse 1.8s ease-in-out infinite",
+              }}
+            >
+              <span style={{
+                width: 6, height: 6, borderRadius: "50%",
+                background: "#f0d8d8",
+                animation: "newDot 1.8s ease-in-out infinite",
+              }} />
+              nuevo {new Date().toLocaleDateString("es-MX", { day: "2-digit", month: "2-digit", year: "numeric" })}
+            </span>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 16, position: "relative", zIndex: 1 }}>
+              <div style={{
+                width: 48, height: 48, borderRadius: "50%",
+                background: "linear-gradient(135deg, #3d0000, #6b0000)",
+                border: "1px solid #c94f3e55",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 22, flexShrink: 0,
+                animation: "flicker 4s ease-in-out infinite",
+              }}>
+                🩸
+              </div>
+              <div>
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 18, color: "#f0d8d8", margin: "0 0 4px", fontStyle: "italic" }}>
+                  Evil Dead Rise: ¿te atreves?
+                </p>
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 13, color: "#c99898", margin: 0, fontStyle: "italic" }}>
+                  una noche de cine, sangre y sustos ♡
+                </p>
+              </div>
+            </div>
+          </button>
+
+          {/* ── CARD 2.5 — Plan del domingo: café + BTS (nuevo) ── */}
+          <button
+            onClick={onGoBts}
+            style={{
+              width: "100%",
+              maxWidth: 400,
+              padding: "26px 32px",
+              borderRadius: 24,
+              border: "1.5px solid #ddc8f2",
+              background: "linear-gradient(135deg, #faf7ff 0%, #f5edff 60%, #f1e6fb 100%)",
+              cursor: "pointer",
+              textAlign: "left",
+              boxShadow: "0 8px 32px rgba(147,112,192,0.14)",
+              transition: "transform 0.22s ease, box-shadow 0.22s ease",
+              position: "relative",
+              overflow: "hidden",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-4px)"
+              e.currentTarget.style.boxShadow = "0 16px 48px rgba(147,112,192,0.24)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)"
+              e.currentTarget.style.boxShadow = "0 8px 32px rgba(147,112,192,0.14)"
             }}
           >
             {/* Badge "nuevo" */}
@@ -257,7 +372,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
                 gap: 5,
                 padding: "4px 11px",
                 borderRadius: 50,
-                background: "linear-gradient(135deg, #d4607a, #c0606e)",
+                background: "linear-gradient(135deg, #9370c0, #b48ed6)",
                 color: "#fff",
                 fontFamily: "'Georgia', serif",
                 fontSize: 10,
@@ -272,24 +387,24 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
                 background: "#fff",
                 animation: "newDot 1.8s ease-in-out infinite",
               }} />
-              nuevo 01/07/2026
+              nuevo · plan domingo
             </span>
 
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <div style={{
                 width: 48, height: 48, borderRadius: "50%",
-                background: "linear-gradient(135deg, #fce8ec, #f9d0d8)",
+                background: "linear-gradient(135deg, #e6d5fa, #d4bdf0)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 22, flexShrink: 0,
               }}>
-                🌙
+                💜
               </div>
               <div>
-                <p style={{ fontFamily: "'Georgia', serif", fontSize: 18, color: "#5b2d2d", margin: "0 0 4px" }}>
-                  Una invitación para salir
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 18, color: "#4a2f63", margin: "0 0 4px" }}>
+                  Domingo: café + BTS en CDMX
                 </p>
-                <p style={{ fontFamily: "'Georgia', serif", fontSize: 13, color: "#b08090", margin: 0, fontStyle: "italic" }}>
-                  dos ideas que quiero compartirte ♡
+                <p style={{ fontFamily: "'Georgia', serif", fontSize: 13, color: "#9b80b8", margin: 0, fontStyle: "italic" }}>
+                  confírmame si te late el plan ♡
                 </p>
               </div>
             </div>
@@ -594,8 +709,8 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
 
         </motion.div>
 
-        {/* ── Botón línea del tiempo ── */}
-        <motion.div
+        {/* ── Botón línea del tiempo — OCULTO a petición ── */}
+        {false && <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.7 }}
@@ -644,10 +759,10 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
               </p>
             </div>
           </button>
-        </motion.div>
+        </motion.div>}
 
-        {/* ── Botón Lo que siento ── */}
-        <motion.div
+        {/* ── Botón Lo que siento — OCULTO a petición ── */}
+        {false && <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.05, duration: 0.7 }}
@@ -690,7 +805,7 @@ function LandingPage({ onGoCalendar, onGoProposal, onGoDate, onGoTimeline, onGoF
               </p>
             </div>
           </button>
-        </motion.div>
+        </motion.div>}
 
         {/* Footer */}
         <motion.p

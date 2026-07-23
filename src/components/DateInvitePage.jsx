@@ -27,53 +27,42 @@ async function notificar(respuesta) {
   }
 }
 
-// ─── Tokens ────────────────────────────────────────────────────────────────
+// ─── Tokens — tema Evil Dead Rise: sangre, oscuridad, terror ────────────────
 const C = {
-  wine:      "#3d0f1c",
-  wineLight: "#5c1c2e",
-  wineSoft:  "#7a2c3e",
-  cream:     "#f8efdf",
-  paper:     "#fbf5e9",
-  ink:       "#3a2418",
-  inkSoft:   "#6b4a3a",
-  gold:      "#c9a24c",
-  goldSoft:  "#e3c98f",
-  blush:     "#d98a95",
+  wine:      "#1a0202",
+  wineLight: "#3d0000",
+  wineSoft:  "#6b0000",
+  cream:     "#e8ded4",
+  paper:     "#efe6da",
+  ink:       "#2a1a12",
+  inkSoft:   "#5a3c30",
+  gold:      "#a10000",
+  goldSoft:  "#c94f3e",
+  blush:     "#8b1a1a",
 }
 
 const dates = [
   {
-    id: "friday",
-    course: "Primer tiempo",
-    day: "Viernes",
-    seal: "🕯️",
-    title: "Cena el viernes,\ny lo que se vaya dando",
+    id: "jueves",
+    course: "Función I",
+    day: "Jueves",
+    seal: "🩸",
+    title: "Evil Dead Rise\njueves en la noche",
     description:
-      "Empezamos con una cena tranquila — de esas donde nadie tiene prisa por levantarse de la mesa. Y de ahí, lo que se sienta bien: quedarnos platicando, ver una película, o simplemente dejar que la noche decida por nosotros.",
-    details: [
-      { icon: "🍷", text: "Cena en un lugar que se sienta bien" },
-      { icon: "🎬", text: "O nos quedamos a ver una película" },
-      { icon: "🌙", text: "Sin plan fijo después — lo que se dé" },
-    ],
-    tag: "una cena, cero planes después",
-    note: "El viernes contigo, sin saber cómo termina, ya me gusta ♡",
+      "Luces apagadas, tu mano cerca de la mía por si el susto está muy fuerte, y dos horas de gritos que prometo no dejarte pasar sola. Yo llevo las palomitas, tú solo trae ganas de asustarte conmigo.",
+    tag: "una noche sangrienta, dos boletos, cero excusas",
+    note: "Si sobrevivimos la función, sobrevivimos cualquier cosa… y contigo quiero intentarlo ♡",
   },
   {
-    id: "sunday",
-    course: "Segundo tiempo",
-    day: "Domingo",
-    seal: "🌇",
-    title: "Domingo en un lugar bonito,\ntú eliges dónde",
+    id: "viernes",
+    course: "Función II",
+    day: "Viernes",
+    seal: "🔪",
+    title: "Evil Dead Rise\nviernes en la noche",
     description:
-      "Comer o cenar, tú decides — en algún lugar que se vea bonito, con esa luz que te gusta. Y si ese día juega México en el Mundial, nos plantamos a verlo donde sea, con todo y grito de gol incluido.",
-    details: [
-      { icon: "🍽️", text: "Comida o cena, como tú prefieras" },
-      { icon: "📍", text: "El lugar lo eliges tú" },
-      { icon: "⚽", text: "Si juega México, vemos el partido juntos" },
-      { icon: "🌇", text: "Ideal si buscas algo tranquilo y bonito" },
-    ],
-    tag: "tú eliges el lugar, yo elijo estar ahí",
-    note: "Un domingo bonito, donde tú decidas, suena perfecto ♡",
+      "Mismo terror, pero para cerrar la semana como se debe. Cine a oscuras, la peor idea para dormir tranquilos y la mejor excusa que se me ha ocurrido para quedarme pegado a ti hasta que se prendan las luces.",
+    tag: "para cerrar la semana con un buen susto, y contigo",
+    note: "El viernes contigo, sangre y todo, ya se me hace la mejor idea de la semana ♡",
   },
 ]
 
@@ -103,6 +92,69 @@ function CandleGlow() {
         pointerEvents: "none",
       }} />
     </>
+  )
+}
+
+// ─── Goteo de sangre en el borde superior — ahora "respira" y escurre ─────
+function BloodDrip() {
+  const drips = [
+    { left: "8%",  h: 34, w: 7, dur: 3.2 },
+    { left: "19%", h: 18, w: 5, dur: 2.6 },
+    { left: "33%", h: 46, w: 8, dur: 3.8 },
+    { left: "48%", h: 22, w: 6, dur: 2.9 },
+    { left: "61%", h: 38, w: 7, dur: 3.4 },
+    { left: "74%", h: 16, w: 5, dur: 2.4 },
+    { left: "88%", h: 30, w: 7, dur: 3.1 },
+  ]
+  return (
+    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 60, zIndex: 2, pointerEvents: "none" }}>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 10, background: C.gold, opacity: 0.9 }} />
+      {drips.map((d, i) => (
+        <div key={i} style={{
+          position: "absolute", top: 8, left: d.left, width: d.w, height: d.h,
+          background: `linear-gradient(to bottom, ${C.gold}, ${C.blush}00)`,
+          borderRadius: "0 0 50% 50%",
+          opacity: 0.85,
+          transformOrigin: "top center",
+          animation: `ooze ${d.dur}s ease-in-out infinite`,
+          animationDelay: `${i * 0.35}s`,
+        }} />
+      ))}
+    </div>
+  )
+}
+
+// ─── Gotas de sangre cayendo por toda la pantalla — ambiente ──────────────
+function FallingBlood() {
+  const drops = Array.from({ length: 14 }, (_, i) => ({
+    id: i,
+    left: `${(i * 7.3) % 100}%`,
+    size: 4 + (i % 4) * 2,
+    dur: 3.5 + (i % 5) * 1.1,
+    delay: (i % 7) * 0.9,
+  }))
+  return (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 1 }}>
+      {drops.map((d) => (
+        <div
+          key={d.id}
+          style={{
+            position: "absolute",
+            top: "-5%",
+            left: d.left,
+            width: d.size,
+            height: d.size * 1.6,
+            borderRadius: "50% 50% 50% 0",
+            transform: "rotate(45deg)",
+            background: `linear-gradient(160deg, ${C.goldSoft}, ${C.gold})`,
+            opacity: 0,
+            animation: `fallDrop ${d.dur}s linear infinite`,
+            animationDelay: `${d.delay}s`,
+            boxShadow: `0 0 6px ${C.gold}55`,
+          }}
+        />
+      ))}
+    </div>
   )
 }
 
@@ -249,10 +301,6 @@ function MenuEntry({ date, expanded, onToggle, onSelect, index }) {
               {date.description}
             </p>
 
-            <div style={{ marginBottom: 16 }}>
-              {date.details.map((d, i) => <DottedRow key={i} icon={d.icon} text={d.text} />)}
-            </div>
-
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
               <p style={{
                 fontFamily: "Georgia, serif",
@@ -270,7 +318,7 @@ function MenuEntry({ date, expanded, onToggle, onSelect, index }) {
                 onClick={(e) => { e.stopPropagation(); onSelect(date) }}
                 style={{
                   padding: "10px 22px",
-                  borderRadius: 2,
+                  borderRadius: 6,
                   border: `1px solid ${C.wine}`,
                   background: C.wine,
                   color: C.cream,
@@ -281,7 +329,7 @@ function MenuEntry({ date, expanded, onToggle, onSelect, index }) {
                   cursor: "pointer",
                 }}
               >
-                elegir esta noche ♡
+                elegir esta función 🩸
               </motion.button>
             </div>
           </motion.div>
@@ -329,30 +377,30 @@ function ConfirmScreen({ date, onBack }) {
           fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: 400,
           fontSize: 21, color: C.paper, margin: "0 0 10px",
         }}>
-          …sabía que sí querías
+          …sabía que no ibas a poder escapar de mí
         </h3>
         <p style={{
           fontFamily: "Georgia, serif", fontSize: 13.5, color: `${C.paper}bb`,
           fontStyle: "italic", lineHeight: 1.8, margin: "0 0 26px",
         }}>
-          "Tal vez otro día" nunca fue una opción real de la carta.<br />
-          Ya está reservado. ♡
+          "Tal vez otro día" nunca fue una opción real de la cartelera.<br />
+          Ya nos apartaron los mejores asientos. ♡
         </p>
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => {
-            notificar(`✅ Aceptó la cita — ${date.day}: ${date.title.replace("\n", " ")} (después de intentar escapar)`)
+            notificar(`✅ Aceptó ir al cine — ${date.day}: ${date.title.replace("\n", " ")} (después de intentar escapar)`)
             setAnswered(true)
           }}
           style={{
-            padding: "13px 36px", borderRadius: 2, border: `1px solid ${C.gold}`,
+            padding: "13px 36px", borderRadius: 6, border: `1px solid ${C.gold}`,
             background: `linear-gradient(135deg, ${C.gold}, ${C.goldSoft})`,
-            color: C.wine, fontFamily: "Georgia, serif", fontSize: 14, fontStyle: "italic",
+            color: C.paper, fontFamily: "Georgia, serif", fontSize: 14, fontStyle: "italic",
             cursor: "pointer", letterSpacing: "0.02em",
           }}
         >
-          sellar la cita ♡
+          está bien, me rindo — sellemos esto 🩸
         </motion.button>
       </motion.div>
     )
@@ -365,13 +413,20 @@ function ConfirmScreen({ date, onBack }) {
         animate={{ opacity: 1 }}
         style={{ textAlign: "center", maxWidth: 420 }}
       >
-        <WaxSeal symbol={date.seal} stamped />
+        <div style={{ position: "relative" }}>
+          <div style={{
+            position: "absolute", top: -6, left: "50%", transform: "translateX(-50%)",
+            width: 130, height: 130, pointerEvents: "none",
+            background: `radial-gradient(circle, ${C.gold}22 0%, transparent 70%)`,
+          }} />
+          <WaxSeal symbol={date.seal} stamped />
+        </div>
 
         <p style={{
           fontFamily: "Georgia, serif", fontSize: 10, letterSpacing: "0.28em",
           textTransform: "uppercase", color: C.gold, margin: "0 0 10px",
         }}>
-          reservación confirmada
+          ya quedamos, ya no hay vuelta atrás
         </p>
 
         <h3 style={{
@@ -394,10 +449,8 @@ function ConfirmScreen({ date, onBack }) {
           borderRadius: 4,
           padding: "22px 26px",
           marginBottom: 26,
-          textAlign: "left",
+          textAlign: "center",
         }}>
-          {date.details.map((d, i) => <DottedRow key={i} icon={d.icon} text={d.text} />)}
-          <Flourish color={C.wine} />
           <p style={{
             fontFamily: "Georgia, serif", fontSize: 13, color: C.wine,
             fontStyle: "italic", margin: 0, textAlign: "center",
@@ -430,7 +483,7 @@ function ConfirmScreen({ date, onBack }) {
         fontFamily: "Georgia, serif", fontSize: 10, letterSpacing: "0.28em",
         textTransform: "uppercase", color: C.gold, margin: "0 0 14px",
       }}>
-        confirmar reservación
+        ¿le entramos a esto?
       </p>
 
       <h3 style={{
@@ -454,21 +507,21 @@ function ConfirmScreen({ date, onBack }) {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              notificar(`✅ Aceptó la cita — ${date.day}: ${date.title.replace("\n", " ")}`)
+              notificar(`✅ Aceptó ir al cine — ${date.day}: ${date.title.replace("\n", " ")}`)
               setAnswered(true)
             }}
             style={{
-              padding: "13px 34px", borderRadius: 2, border: `1px solid ${C.gold}`,
+              padding: "13px 34px", borderRadius: 6, border: `1px solid ${C.gold}`,
               background: `linear-gradient(135deg, ${C.gold}, ${C.goldSoft})`,
-              color: C.wine, fontFamily: "Georgia, serif", fontSize: 14, fontStyle: "italic",
+              color: C.paper, fontFamily: "Georgia, serif", fontSize: 14, fontStyle: "italic",
               cursor: "pointer", letterSpacing: "0.02em",
               boxShadow: `0 8px 24px ${C.gold}44`,
             }}
           >
-            sí, reservemos ♡
+            sí, cuenta conmigo 🩸
           </motion.button>
           <RunawayNo onCatch={() => {
-            notificar(`😅 Intentó escapar de la reservación — ${date.day}: ${date.title.replace("\n", " ")}`)
+            notificar(`😅 Intentó escapar de los boletos — ${date.day}: ${date.title.replace("\n", " ")}`)
             setNoCaught(true)
           }} />
         </div>
@@ -482,7 +535,7 @@ function ConfirmScreen({ date, onBack }) {
           fontStyle: "italic", textDecoration: "underline",
         }}
       >
-        ← ver la otra opción
+        ← ver la otra función
       </button>
     </motion.div>
   )
@@ -495,7 +548,7 @@ export default function DateInvitePage({ onBack }) {
   return (
     <main style={{
       minHeight: "100vh",
-      background: `radial-gradient(ellipse at 50% 0%, ${C.wineLight} 0%, ${C.wine} 55%, #2a0a14 100%)`,
+      background: `radial-gradient(ellipse at 50% 0%, ${C.wineLight} 0%, ${C.wine} 55%, #050101 100%)`,
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -511,9 +564,25 @@ export default function DateInvitePage({ onBack }) {
           50% { opacity: 0.6; transform: scale(0.97); }
           75% { opacity: 0.9; transform: scale(1.02); }
         }
+        @keyframes ooze {
+          0%, 100% { transform: scaleY(1); opacity: 0.85; }
+          50% { transform: scaleY(1.35); opacity: 1; }
+        }
+        @keyframes fallDrop {
+          0% { top: -5%; opacity: 0; }
+          8% { opacity: 0.9; }
+          85% { opacity: 0.7; }
+          100% { top: 106%; opacity: 0; }
+        }
+        @keyframes titleDrip {
+          0%, 100% { text-shadow: 0 2px 0 ${C.gold}66, 0 8px 14px rgba(161,0,0,0.35); }
+          50% { text-shadow: 0 2px 0 ${C.gold}aa, 0 14px 22px rgba(161,0,0,0.55); }
+        }
       `}</style>
 
       <CandleGlow />
+      <FallingBlood />
+      <BloodDrip />
 
       <button
         onClick={onBack}
@@ -549,7 +618,7 @@ export default function DateInvitePage({ onBack }) {
                 color: C.goldSoft, textTransform: "uppercase", margin: "0 0 14px", opacity: 0.85,
               }}
             >
-              la carta de esta semana
+              hay boletos con tu nombre
             </motion.p>
 
             <motion.h2
@@ -560,9 +629,10 @@ export default function DateInvitePage({ onBack }) {
                 fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: 400,
                 fontSize: "clamp(28px, 5.5vw, 44px)", color: C.paper,
                 lineHeight: 1.2, margin: "0 0 10px", textAlign: "center",
+                animation: "titleDrip 3.5s ease-in-out infinite",
               }}
             >
-              ¿Qué se te antoja esta semana?
+              ¿Te animas a pasar miedo conmigo?
             </motion.h2>
 
             <motion.p
@@ -574,7 +644,7 @@ export default function DateInvitePage({ onBack }) {
                 color: `${C.paper}aa`, margin: "0 0 36px", textAlign: "center",
               }}
             >
-              Dos planes en la carta — tú eliges el que se te antoje más ♡
+              Ya hace mucho que no vamos al cine, me encantaría mucho que fueramos🩸
             </motion.p>
 
             <motion.div
@@ -585,7 +655,7 @@ export default function DateInvitePage({ onBack }) {
                 width: "100%",
                 background: `linear-gradient(165deg, ${C.paper} 0%, ${C.cream} 100%)`,
                 border: `1px solid ${C.gold}44`,
-                borderRadius: 6,
+                borderRadius: 16,
                 padding: "40px 34px",
                 boxShadow: `0 30px 70px rgba(0,0,0,0.4), inset 0 0 0 6px ${C.paper}, inset 0 0 0 7px ${C.gold}33`,
               }}
@@ -611,7 +681,7 @@ export default function DateInvitePage({ onBack }) {
                 color: `${C.goldSoft}bb`, marginTop: 26, textAlign: "center",
               }}
             >
-              el día lo eliges tú — el resto lo armamos juntos ♡
+              tú dime la noche y yo organizo🩸
             </motion.p>
           </motion.div>
         ) : (
